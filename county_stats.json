@@ -1,0 +1,408 @@
+[
+  {
+    "County":"Alameda",
+    "REGION":"Bay Area",
+    "Total CPAD Acreage":476565,
+    "ACR_NORM_1":0.24,
+    "CPAD Acres per 1000 inhabitants":0.08
+  },
+  {
+    "County":"Alpine",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":474266,
+    "ACR_NORM_1":0.94,
+    "CPAD Acres per 1000 inhabitants":367.60
+  },
+  {
+    "County":"Amador",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":387827,
+    "ACR_NORM_1":0.25,
+    "CPAD Acres per 1000 inhabitants":2.74
+  },
+  {
+    "County":"Butte",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":1073263,
+    "ACR_NORM_1":0.21,
+    "CPAD Acres per 1000 inhabitants":1.10
+  },
+  {
+    "County":"Calaveras",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":662840,
+    "ACR_NORM_1":0.22,
+    "CPAD Acres per 1000 inhabitants":3.65
+  },
+  {
+    "County":"Yolo",
+    "REGION":"Central Valley",
+    "Total CPAD Acreage":653450,
+    "ACR_NORM_1":0.10,
+    "CPAD Acres per 1000 inhabitants":0.37
+  },
+  {
+    "County":"Contra Costa",
+    "REGION":"Bay Area",
+    "Total CPAD Acreage":481394,
+    "ACR_NORM_1":0.28,
+    "CPAD Acres per 1000 inhabitants":0.14
+  },
+  {
+    "County":"Del Norte",
+    "REGION":"North Coast",
+    "Total CPAD Acreage":648861,
+    "ACR_NORM_1":0.76,
+    "CPAD Acres per 1000 inhabitants":18.01
+  },
+  {
+    "County":"El Dorado",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":1144947,
+    "ACR_NORM_1":0.49,
+    "CPAD Acres per 1000 inhabitants":3.56
+  },
+  {
+    "County":"Fresno",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":3850607,
+    "ACR_NORM_1":0.40,
+    "CPAD Acres per 1000 inhabitants":1.93
+  },
+  {
+    "County":"Glenn",
+    "REGION":"Central Valley",
+    "Total CPAD Acreage":849132,
+    "ACR_NORM_1":0.31,
+    "CPAD Acres per 1000 inhabitants":9.83
+  },
+  {
+    "County":"Humboldt",
+    "REGION":"North Coast",
+    "Total CPAD Acreage":2293951,
+    "ACR_NORM_1":0.26,
+    "CPAD Acres per 1000 inhabitants":4.72
+  },
+  {
+    "County":"Imperial",
+    "REGION":"Southern California",
+    "Total CPAD Acreage":2868458,
+    "ACR_NORM_1":0.55,
+    "CPAD Acres per 1000 inhabitants":11.05
+  },
+  {
+    "County":"Inyo",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":6546558,
+    "ACR_NORM_1":0.92,
+    "CPAD Acres per 1000 inhabitants":334.50
+  },
+  {
+    "County":"Kern",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":5221435,
+    "ACR_NORM_1":0.25,
+    "CPAD Acres per 1000 inhabitants":2.01
+  },
+  {
+    "County":"Kings",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":890800,
+    "ACR_NORM_1":0.01,
+    "CPAD Acres per 1000 inhabitants":0.08
+  },
+  {
+    "County":"Lassen",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":3021450,
+    "ACR_NORM_1":0.59,
+    "CPAD Acres per 1000 inhabitants":52.27
+  },
+  {
+    "County":"Los Angeles",
+    "REGION":"Southern California",
+    "Total CPAD Acreage":2611372,
+    "ACR_NORM_1":0.34,
+    "CPAD Acres per 1000 inhabitants":0.09
+  },
+  {
+    "County":"Madera",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":1377575,
+    "ACR_NORM_1":0.37,
+    "CPAD Acres per 1000 inhabitants":4.19
+  },
+  {
+    "County":"Marin",
+    "REGION":"Bay Area",
+    "Total CPAD Acreage":336285,
+    "ACR_NORM_1":0.48,
+    "CPAD Acres per 1000 inhabitants":0.66
+  },
+  {
+    "County":"Mariposa",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":935607,
+    "ACR_NORM_1":0.53,
+    "CPAD Acres per 1000 inhabitants":28.97
+  },
+  {
+    "County":"Mendocino",
+    "REGION":"North Coast",
+    "Total CPAD Acreage":2247878,
+    "ACR_NORM_1":0.21,
+    "CPAD Acres per 1000 inhabitants":5.39
+  },
+  {
+    "County":"Merced",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":1261432,
+    "ACR_NORM_1":0.09,
+    "CPAD Acres per 1000 inhabitants":0.53
+  },
+  {
+    "County":"Modoc",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":2689712,
+    "ACR_NORM_1":0.64,
+    "CPAD Acres per 1000 inhabitants":181.86
+  },
+  {
+    "County":"Mono",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":2003703,
+    "ACR_NORM_1":0.93,
+    "CPAD Acres per 1000 inhabitants":144.84
+  },
+  {
+    "County":"Monterey",
+    "REGION":"Central Coast",
+    "Total CPAD Acreage":2121212,
+    "ACR_NORM_1":0.22,
+    "CPAD Acres per 1000 inhabitants":1.15
+  },
+  {
+    "County":"Napa",
+    "REGION":"Bay Area",
+    "Total CPAD Acreage":505857,
+    "ACR_NORM_1":0.26,
+    "CPAD Acres per 1000 inhabitants":1.04
+  },
+  {
+    "County":"Nevada",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":623852,
+    "ACR_NORM_1":0.37,
+    "CPAD Acres per 1000 inhabitants":2.51
+  },
+  {
+    "County":"Orange",
+    "REGION":"Southern California",
+    "Total CPAD Acreage":508921,
+    "ACR_NORM_1":0.27,
+    "CPAD Acres per 1000 inhabitants":0.05
+  },
+  {
+    "County":"Placer",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":960108,
+    "ACR_NORM_1":0.43,
+    "CPAD Acres per 1000 inhabitants":1.67
+  },
+  {
+    "County":"Plumas",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":1672709,
+    "ACR_NORM_1":0.72,
+    "CPAD Acres per 1000 inhabitants":57.65
+  },
+  {
+    "County":"Riverside",
+    "REGION":"Southern California",
+    "Total CPAD Acreage":4673122,
+    "ACR_NORM_1":0.61,
+    "CPAD Acres per 1000 inhabitants":1.85
+  },
+  {
+    "County":"Sacramento",
+    "REGION":"Central Valley",
+    "Total CPAD Acreage":636078,
+    "ACR_NORM_1":0.11,
+    "CPAD Acres per 1000 inhabitants":0.06
+  },
+  {
+    "County":"San Benito",
+    "REGION":"Central Coast",
+    "Total CPAD Acreage":889408,
+    "ACR_NORM_1":0.13,
+    "CPAD Acres per 1000 inhabitants":2.14
+  },
+  {
+    "County":"San Bernardino",
+    "REGION":"Southern California",
+    "Total CPAD Acreage":12867927,
+    "ACR_NORM_1":0.67,
+    "CPAD Acres per 1000 inhabitants":5.04
+  },
+  {
+    "County":"San Diego",
+    "REGION":"Southern California",
+    "Total CPAD Acreage":2712151,
+    "ACR_NORM_1":0.49,
+    "CPAD Acres per 1000 inhabitants":0.48
+  },
+  {
+    "County":"San Francisco",
+    "REGION":"Bay Area",
+    "Total CPAD Acreage":30238,
+    "ACR_NORM_1":0.19,
+    "CPAD Acres per 1000 inhabitants":0.01
+  },
+  {
+    "County":"San Joaquin",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":912595,
+    "ACR_NORM_1":0.02,
+    "CPAD Acres per 1000 inhabitants":0.03
+  },
+  {
+    "County":"San Luis Obispo",
+    "REGION":"Central Coast",
+    "Total CPAD Acreage":2124267,
+    "ACR_NORM_1":0.25,
+    "CPAD Acres per 1000 inhabitants":2.16
+  },
+  {
+    "County":"San Mateo",
+    "REGION":"Bay Area",
+    "Total CPAD Acreage":290479,
+    "ACR_NORM_1":0.38,
+    "CPAD Acres per 1000 inhabitants":0.16
+  },
+  {
+    "County":"Santa Clara",
+    "REGION":"Bay Area",
+    "Total CPAD Acreage":831659,
+    "ACR_NORM_1":0.25,
+    "CPAD Acres per 1000 inhabitants":0.12
+  },
+  {
+    "County":"Santa Cruz",
+    "REGION":"Central Coast",
+    "Total CPAD Acreage":285713,
+    "ACR_NORM_1":0.30,
+    "CPAD Acres per 1000 inhabitants":0.33
+  },
+  {
+    "County":"Shasta",
+    "REGION":"Northern California",
+    "Total CPAD Acreage":2465233,
+    "ACR_NORM_1":0.41,
+    "CPAD Acres per 1000 inhabitants":6.22
+  },
+  {
+    "County":"Sierra",
+    "REGION":"Sierras",
+    "Total CPAD Acreage":615316,
+    "ACR_NORM_1":0.73,
+    "CPAD Acres per 1000 inhabitants":126.92
+  },
+  {
+    "County":"Siskiyou",
+    "REGION":"Northern California",
+    "Total CPAD Acreage":4062266,
+    "ACR_NORM_1":0.63,
+    "CPAD Acres per 1000 inhabitants":57.87
+  },
+  {
+    "County":"Solano",
+    "REGION":"Bay Area",
+    "Total CPAD Acreage":544111,
+    "ACR_NORM_1":0.11,
+    "CPAD Acres per 1000 inhabitants":0.16
+  },
+  {
+    "County":"Sonoma",
+    "REGION":"Bay Area",
+    "Total CPAD Acreage":1016737,
+    "ACR_NORM_1":0.14,
+    "CPAD Acres per 1000 inhabitants":0.31
+  },
+  {
+    "County":"Stanislaus",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":970173,
+    "ACR_NORM_1":0.09,
+    "CPAD Acres per 1000 inhabitants":0.19
+  },
+  {
+    "County":"Sutter",
+    "REGION":"Central Valley",
+    "Total CPAD Acreage":389436,
+    "ACR_NORM_1":0.04,
+    "CPAD Acres per 1000 inhabitants":0.17
+  },
+  {
+    "County":"Tehama",
+    "REGION":"Northern California",
+    "Total CPAD Acreage":1892926,
+    "ACR_NORM_1":0.29,
+    "CPAD Acres per 1000 inhabitants":9.75
+  },
+  {
+    "County":"Trinity",
+    "REGION":"Northern California",
+    "Total CPAD Acreage":2052766,
+    "ACR_NORM_1":0.76,
+    "CPAD Acres per 1000 inhabitants":119.97
+  },
+  {
+    "County":"Tulare",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":3099338,
+    "ACR_NORM_1":0.50,
+    "CPAD Acres per 1000 inhabitants":4.23
+  },
+  {
+    "County":"Tuolumne",
+    "REGION":"San Joaquin Valley",
+    "Total CPAD Acreage":1457657,
+    "ACR_NORM_1":0.75,
+    "CPAD Acres per 1000 inhabitants":20.18
+  },
+  {
+    "County":"Colusa",
+    "REGION":"Central Valley",
+    "Total CPAD Acreage":740383,
+    "ACR_NORM_1":0.17,
+    "CPAD Acres per 1000 inhabitants":6.82
+  },
+  {
+    "County":"Yuba",
+    "REGION":"Central Valley",
+    "Total CPAD Acreage":411821,
+    "ACR_NORM_1":0.19,
+    "CPAD Acres per 1000 inhabitants":1.33
+  },
+  {
+    "County":"Ventura",
+    "REGION":"Central Coast",
+    "Total CPAD Acreage":1189161,
+    "ACR_NORM_1":0.54,
+    "CPAD Acres per 1000 inhabitants":0.85
+  },
+  {
+    "County":"Santa Barbara",
+    "REGION":"Central Coast",
+    "Total CPAD Acreage":1760915,
+    "ACR_NORM_1":0.46,
+    "CPAD Acres per 1000 inhabitants":2.01
+  },
+  {
+    "County":"Lake",
+    "REGION":"Central Valley",
+    "Total CPAD Acreage":850980,
+    "ACR_NORM_1":0.47,
+    "CPAD Acres per 1000 inhabitants":6.89
+  }
+]
