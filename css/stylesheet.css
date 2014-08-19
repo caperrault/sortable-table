@@ -134,6 +134,10 @@ label {
   fill: none;
 }
 
+.rowsGrp {
+  clear: both;
+}
+
 .row {
   fill: black;
   border: 5px dotted black;
@@ -156,14 +160,14 @@ label {
     fill: red;
 }
 
-#countyMap{
+#countyTable{
 overflow: scroll;
 height: 500px;
 float: left;
 width: 500px;
 }
 
-#countyMapSvg{
+#countyRow{
 display: block;
 width: 90%;
 height: 1280px;
