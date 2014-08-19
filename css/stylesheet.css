@@ -172,3 +172,9 @@ display: block;
 width: 90%;
 height: 1280px;
 }
+
+#countyIndex {
+  float: left;
+  width: 20px;
+  height: 1000px;
+}
