@@ -1,0 +1,388 @@
+<meta charset="utf-8">
+<html>
+<head>
+
+<title>Table</title>
+
+<link rel="stylesheet"  href="style.css"/>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+<body>
+
+<svg class="canvas"></svg>
+
+<script>
+
+var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 2000 - margin.top - margin.bottom;
+
+var canvas = d3.select(".canvas")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var headerGrp = canvas.append("g").attr("class", "headerGrp");
+var rowsGrp = canvas.append("g").attr("class","rowsGrp");
+
+var fieldHeight = 20;
+var fieldWidth = 200;
+
+var previousSort = null;
+var format = d3.time.format("%a %b %d %Y");
+//var dateFn = function(date) { return format.parse(d.created_at) };
+
+d3.json("Counties_stats_3col.json", function(data) {
+
+refreshTable(null);
+
+function refreshTable(sortOn){
+
+	// create the table header
+	var header = headerGrp.selectAll("g")
+		.data(d3.keys(data[0]))
+	  .enter().append("g")
+		.attr("class", "header")
+		.attr("transform", function (d, i){
+			return "translate(" + i * fieldWidth + ",0)";
+		})
+		.on("click", function(d){ return refreshTable(d);});
+
+	header.append("rect")
+		.attr("width", fieldWidth)
+		.attr("height", fieldHeight)
+    .style("border", "2px red solid");
+
+	header.append("text")
+		.attr("x", fieldWidth / 2)
+		.attr("y", fieldHeight / 2)
+		.attr("dy", ".35em")
+		.text(String);
+
+	// fill the table
+	// select rows
+	var rows = rowsGrp.selectAll("g.row").data(data,
+    function(d){ return d.County; });
+
+	// create rows
+	var rowsEnter = rows.enter().append("svg:g")
+		.attr("class","row")
+		.attr("transform", function (d, i){
+			return "translate(0," + (i+1) * (fieldHeight+1) + ")";
+		})
+    .on("click", function(d) {
+                            d3.select(".selected").classed("selected", false);
+                            d3.select(this).classed("selected", true).transition().duration(300);
+                            updatePie1(d.County);
+                            updatePie2(d.County);
+                          //  updateCountyName(d.County+" County: "+d3.format(",")(d.properties.ac_tot)+" CPAD Acres");
+                          });
+
+	// select cells
+	var cells = rows.selectAll("g.cell").data(function(d){ if (typeof d3.values(d) == "number") {
+    return d3.format(',')(d3.values(d));}
+    else {
+      return d3.values(d);
+    };
+    })
+    .style("border", "2px black solid");
+
+	// create cells
+	var cellsEnter = cells.enter().append("svg:g")
+		.attr("class", "cell")
+		.attr("transform", function (d, i){
+			return "translate(" + i * fieldWidth + ",0)";
+		})
+    .style("border", "2px black solid");
+
+	cellsEnter.append("rect")
+		.attr("width", fieldWidth)
+		.attr("height", fieldHeight)
+    .style("border", "2px black solid");
+
+	cellsEnter.append("text")
+		.attr("x", fieldWidth / 2)
+		.attr("y", fieldHeight / 2)
+		.attr("dy", ".35em")
+		.text(String);
+
+	//update if not in initialisation
+	if(sortOn !== null) {
+			// update rows
+			if(sortOn != previousSort){
+				rows.sort(function(a,b){return sort(a[sortOn], b[sortOn]);});
+				previousSort = sortOn;
+			}
+			else{
+				rows.sort(function(a,b){return sort(b[sortOn], a[sortOn]);});
+				previousSort = null;
+			}
+			rows.transition()
+				.duration(500)
+				.attr("transform", function (d, i){
+					return "translate(0," + (i+1) * (fieldHeight+1) + ")";
+				});
+	}
+}
+
+function sort(a,b){
+		return a > b ? 1 : a == b ? 0 : -1;
+}
+
+});
+
+  var updatePie1;
+  var updatePie2;
+  var updateCountyName;
+
+    d3.csv("Access_type_allcounties_perc.csv", function (dataset) {
+
+                        var width = 215,
+                            height = 300,
+                            radius = Math.min(width, height) / 2;
+
+                        var div = d3.select("body").append("div")
+                        .attr("class", "pieTooltip")
+                        .style("opacity", 0);
+
+                        var color = d3.scale.ordinal()
+                                            .range(["#FFC8B7", "#EF8B6C", "#F05522", "#E0E0E0"])
+                                            .domain(d3.range(0,4));
+
+                        var svg = d3.select("body").append("svg")
+                                    .attr("width", width)
+                                    .attr("height", height)
+                                    .append("g")
+                                    .attr("transform", "translate(" + width / 2.4 + "," + height / 2.5 + ")");
+
+                        var arc = d3.svg.arc()
+                                    .innerRadius(radius - 45)
+                                    .outerRadius(radius - 20);
+
+                        var pie = d3.layout.pie()
+                                    .value(function(d) { return d.Alameda; })
+                                    .sort(null);
+
+                        var path = svg.datum(dataset).selectAll("path")
+                                      .data(pie)
+                                      .enter().append("path")
+                                      .attr("fill", function(d, i) { return color(i); })
+                                      .classed("chart", true)
+                                      .attr("d", arc)
+                                      .each(function(d) { this._current = d; })
+                                      .attr("data-legend",function(d) { return d.Access_type})
+                                      .style("display", "none")
+                                      .on("mouseover", function(d, i) {
+                                      div.transition().duration(300).style("opacity", 1);
+                                      div.text(dataset[i].Access_type+": "+d.value+"%")
+                                      .style("left", (d3.event.pageX) + "px")
+                                      .style("top", (d3.event.pageY -30) + "px");})
+                                      .on("mouseout", function () { div.transition().duration(300).style("opacity", 0);
+                                      });
+
+                        var legend = d3.select("body").append("svg")
+                        .attr("class", "legend")
+                        .attr("width", radius * 4)
+                        .attr("height", radius * 4)
+                        .selectAll("g")
+                        .data(color.domain())
+                        .enter().append("g")
+                        .attr("transform", function(d, i) { return "translate(220," + i * 20 + ")"; })
+                        .style("display", "none");
+
+                        legend.append("rect")
+                        .attr("y", Math.min(width, height) / 2)
+                        .attr("width", 18)
+                        .attr("height", 18)
+                        .style("fill", color);
+
+                        legend.append("text")
+                        .attr("x", 24)
+                        .attr("y", Math.min(width, height) / 2 + 9)
+                        .attr("dy", ".35em")
+                        .attr("fill", "black")
+                        .attr("font-size", "10px")
+                        .text( function (d, i) { return dataset[i].Access_type;})
+                        .attr("fill", "#444");
+
+                        var titlePie1 = d3.select("body").append("svg")
+                                          .attr("x", 220)
+                                          .attr("y", Math.min(width, height) / 2 - 25)
+                                          .style("display", "none");
+
+                          titlePie1.append("text")
+                          .attr("fill", "black")
+                          .attr("font-size", "12px")
+                          .attr("dy", "1em")
+                          .attr("font-weight", "bold")
+                          .text("Protected areas by access")
+                          .attr("fill", "#444");
+
+                        d3.select("select").on("change.1", change);
+
+                        function change() {
+                          setValue(this.value)
+                        };
+
+                        function setValue (value) {
+                          path.style("display", null);
+                          legend.style("display", null);
+                          titlePie1.style("display", null);
+                          pie.value(function(d) { return d[value]; });
+                          path = path.data(pie);
+                          path.transition().duration(750).attrTween("d", arcTween);
+                        }
+
+                        updatePie1 = setValue;
+
+                        function arcTween(a) {
+                          var i = d3.interpolate(this._current, a);
+                          this._current = i(0);
+                          return function(t) {
+                            return arc(i(t));
+                          }
+                          };
+
+                        });
+
+              d3.csv("Agency_lev_allcounties_perc.csv", function (dataset) {
+
+                             var width = 215,
+                                 height = 300,
+                                 radius = Math.min(width, height) / 2;
+
+                             var div = d3.select("body").append("div")
+                             .attr("class", "pieTooltip")
+                             .style("opacity", 0);
+
+                             var color = d3.scale.category20();
+
+                             var svg = d3.select("body").append("svg")
+                                         .attr("width", width)
+                                         .attr("height", height)
+                                         .attr("y", "-30")
+                                         .append("g")
+                                         .attr("transform", "translate(" + width / 2.4 + "," + height / 2.5 + ")");
+
+                             var arc = d3.svg.arc()
+                                         .innerRadius(radius - 45)
+                                         .outerRadius(radius - 20);
+
+                             var pie2 = d3.layout.pie()
+                                         .value(function(d) { return d.Alameda; })
+                                         .sort(null);
+
+                             var path = svg.datum(dataset).selectAll("path")
+                                           .data(pie2)
+                                           .enter().append("path")
+                                           .attr("fill", function(d, i) { return color(i); })
+                                           .classed("chart", true)
+                                           .attr("d", arc)
+                                           .each(function(d) { this._current = d; })
+                                           .attr("data-legend",function(d) { return d.Agency_lev})
+                                           .style("display", "none")
+                                           .on("mouseover", function(d, i) {
+                                           div.transition().duration(300).style("opacity", 1);
+                                           div.text(dataset[i].Agency_lev+": "+d.value+"%")
+                                           .style("left", (d3.event.pageX) + "px")
+                                           .style("top", (d3.event.pageY -30) + "px");})
+                                           .on("mouseout", function () { div.transition().duration(300).style("opacity", 0);
+                                           });
+
+                              var legend = d3.select("body").append("svg")
+                              .attr("class", "legend")
+                              .attr("width", radius * 4)
+                              .attr("height", radius * 4)
+                              .selectAll("g")
+                              .data(color.domain())
+                              .enter().append("g")
+                              .attr("transform", function(d, i) { return "translate(220," + i * 20 + ")"; })
+                              .style("display", "none");
+
+                              legend.append("rect")
+                              .attr("y", Math.min(width, height) / 2 - 30)
+                              .attr("width", 18)
+                              .attr("height", 18)
+                              .style("fill", color);
+
+                              legend.append("text")
+                              .attr("x", 24)
+                              .attr("y", Math.min(width, height) / 2 - 21)
+                              .attr("dy", ".35em")
+                              .attr("fill", "black")
+                              .attr("font-size", "10px")
+                              .text( function (d, i) { return dataset[i].Agency_lev;})
+                              .attr("fill", "#444");
+
+                              var titlePie2 = d3.select("body").append("svg")
+                                                .attr("x", 220)
+                                                .attr("y", Math.min(width, height) / 2 - 55)
+                                                .style("display", "none");
+
+                                titlePie2.append("text")
+                                .attr("fill", "black")
+                                .attr("font-size", "12px")
+                                .attr("dy", "1em")
+                                .attr("font-weight", "bold")
+                                .text("Protected areas by agency type")
+                                .attr("fill", "#444");
+
+                              /*var countyNameSvg = d3.select("#countyName").append("svg")
+                                                             .attr("width", 600)
+                                                             .attr("height", 50)
+                                                             .style("display", "none");*/
+
+                             d3.selectAll("select").on("change.2", change);
+
+                            function change() {
+                              setValue(this.value);
+                            //  setCountyValue(this.properties.name);
+                            };
+
+                            function setValue(value) {
+                              path.style("display", null);
+                              legend.style("display", null);
+                              titlePie2.style("display", null);
+                              pie2.value(function(d) { return d[value]; });
+                              path = path.data(pie2);
+                              path.transition().duration(750).attrTween("d", arcTween);
+                            };
+
+                        /*    function setCountyValue(name) {
+                              countyNameRect = countyNameSvg.style("display", null)
+                                            .append('rect')
+                                            .attr("width", 600)
+                                            .attr("height", 50)
+                                            .style('fill', "white");
+                              countyName = countyNameSvg.style("display", null)
+                                            .append("text")
+                                            .attr("text-anchor", "left")
+                                            .attr("x","0%")
+                                            .attr("y","50%")
+                                            .text(function() { return name})
+                                            .attr("fill", "#444")
+                                            .attr("font-weight", "bold")
+                                            .attr("font-size", "2em");
+                            };*/
+
+                            updatePie2 = setValue;
+                        //    updateCountyName = setCountyValue;
+
+                            function arcTween(a) {
+                              var i = d3.interpolate(this._current, a);
+                              this._current = i(0);
+                              return function(t) {
+                                return arc(i(t));
+                              }
+                              };
+
+                             });
+
+
+</script>
+
+</body>
+</html>

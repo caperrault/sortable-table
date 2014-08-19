@@ -1,133 +1,650 @@
-<meta charset="utf-8">
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
 
-<title>Table</title>
+    <meta charset="utf-8">
 
-<link rel="stylesheet"  href="style.css"/>
+	  <title>California Protected Areas Data Portal</title>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
+    <meta name="description" content="">
+	  <meta name="author" content="">
+    <meta name="google-site-verification" content="7dej4jCbuusOJlIEYMbqRMG3b7whAst3-VM1u-qmfI4" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="http://www.calands.org/css/base.css" />
+	  <link rel="stylesheet" type="text/css" href="http://www.calands.org/css/skeleton-fluid.css" />
+	  <link rel="stylesheet" type="text/css" href="http://www.calands.org/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.calands.org/css/smoothness/jquery-ui-1.9.1.custom.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.calands.org/highslide/highslide.css" />
+	  <link rel="stylesheet" type="text/css" href="http://www.calands.org/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 
-<svg class="canvas"></svg>
+    <script type="text/javascript">
+		var BASE_URL = "http://www.calands.org/";
+        var NAV_PAGE = "data";
+	  </script>
 
-<script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	  <script src="http://www.calands.org/js/jquery-1.9.0.min.js" type="text/javascript"></script>
+	  <script src="http://www.calands.org/js/jquery-ui-1.10.0.custom.min.js" type="text/javascript"></script>
+    <script src="http://www.calands.org/highslide/highslide-full_jscompress.js" type="text/javascript"></script>
+	  <script src="http://www.calands.org/js/index.js" type="text/javascript"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-var margin = {top: 20, right: 30, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
-    height = 2000 - margin.top - margin.bottom;
+  </head>
 
-var canvas = d3.select(".canvas")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  <body>
 
-var headerGrp = canvas.append("g").attr("class", "headerGrp");
-var rowsGrp = canvas.append("g").attr("class","rowsGrp");
+    <div class="container">
+		    <div class="header">
 
-var fieldHeight = 20;
-var fieldWidth = 200;
+           <div class="one column">&nbsp;</div>
 
-var previousSort = null;
-var format = d3.time.format("%a %b %d %Y");
-//var dateFn = function(date) { return format.parse(d.created_at) };
+           <div class="five columns">
+             <a href="http://www.calands.org/"><img src="http://www.calands.org/images/cpad-logo-blue.png" alt="California Protected Areas Data Portal" /></a>
+           </div>
 
-d3.json("Counties_stats_3col.json", function(data) {
+	         <div id="navigation" class="nine columns">
+             <p class="login"><a href="http://www.calands.org/admin">Login</a></p>
+                <ul>
+          			<li>
+          				<a href="http://www.calands.org/data">CPAD</a>
+          				<div class="dd">
+          					<ul>
+          						<li><a href="http://www.calands.org/data">About CPAD</a></li>
+          						<li><a href="http://www.calands.org/map">CPAD Map</a></li>
+          						<li><a href="http://www.calands.org/data/uses">Uses</a></li>
+          						<li><a href="http://www.calands.org/data/standards">Standards</a></li>
+          						<li><a href="http://www.calands.org/data/history">History</a></li>
+          						<li><a href="http://www.calands.org/data/statistics">Statistics</a></li>
+          						<li><a href="http://www.calands.org/data/reports">Reports</a></li>
+          						<li><a href="http://www.calands.org/data/related">Related Data</a></li>
+          						<li><a href="http://www.calands.org/data/faqs">FAQs</a></li>
+          						<li><a href="http://www.calands.org/data/metadata">Metadata</a></li>
+          					</ul>
+          				</div>
+          			</li>
+          			<li>
+          				<a href="http://www.calands.org/cced">CCED</a>
+          				<div class="dd">
+          					<ul>
+          						<li><a href="http://www.calands.org/cced">About CCED</a></li>
+          						<li><a href="http://www.calands.org/ccedmap">CCED Map</a></li>
+          					</ul>
+          				</div>
+          			</li>
+          			<li>
+          				<a href="http://www.calands.org/revise">revise</a>
+          			</li>
+          			<li>
+        				<a href="http://www.calands.org/resources">resources</a>
+        			  </li>
+          			<li>
+          				<a href="http://www.calands.org/news">news</a>
+          			</li>
+          			<li>
+        				<a href="http://www.calands.org/about">about</a>
+        			  </li>
+      		   </ul>
+      	    </div>
+          </div>
 
-refreshTable(null);
+        <div id="main" class="page" style="">
 
-function refreshTable(sortOn){
+          <div id="breadcrumbs" style="">
+              <p class="breadcrumbs"><a href="http://www.calands.org/">Home</a> > <a href="http://www.calands.org/data">Data</a> > <a href="http://localhost:8000/">CPAD Atlas</a></p>
+          </div>
 
-	// create the table header
-	var header = headerGrp.selectAll("g")
-		.data(d3.keys(data[0]))
-	  .enter().append("g")
-		.attr("class", "header")
-		.attr("transform", function (d, i){
-			return "translate(" + i * fieldWidth + ",0)";
-		})
-		.on("click", function(d){ return refreshTable(d);});
+		      <h2 style="padding-top:0;">CPAD Atlas</h2>
 
-	header.append("rect")
-		.attr("width", fieldWidth)
-		.attr("height", fieldHeight)
-    .style("border", "2px red solid");
+          <div class="content"><p>CPAD contains data about California lands protected for open space purposes and owned in fee by agencies and organizations. More than <strong>101,174,000 acres</strong> of protected land are now inventoried in CPAD. The land is owned by more than <strong>900 government agencies, non-profit and other organizations</strong>, for the CPAD 2014a (February 2014) release.</p>
+          </div>
 
-	header.append("text")
-		.attr("x", fieldWidth / 2)
-		.attr("y", fieldHeight / 2)
-		.attr("dy", ".35em")
-		.text(String);
+          <h3>CPAD Data per County</h3>
 
-	// fill the table
-	// select rows
-	var rows = rowsGrp.selectAll("g.row").data(data,
-    function(d){ return d.County; });
+          <div id="countyChapter">
 
-	// create rows
-	var rowsEnter = rows.enter().append("svg:g")
-		.attr("class","row")
-		.attr("transform", function (d, i){
-			return "translate(0," + (i+1) * (fieldHeight+1) + ")";
-		});
+            <div class="content"><p>California counties are inequally wealthy in protected areas. The map below shows the distribution of protected areas throughout the 58 counties, either in terms of <strong>total acreage</strong> or <strong>acreage per inhabitant</strong>. <strong>Click on any county</strong> to take a deeper look into its protected areas.</p>
+            </div>
 
-	// select cells
-	var cells = rows.selectAll("g.cell").data(function(d){ if (typeof d3.values(d) == "number") {
-    return d3.format(',')(d3.values(d));}
-    else {
-      return d3.values(d);
-    };
-    })
-    .style("border", "2px black solid");
+        <!--  <form>
+            <label><input type="Radio" name="dataset" id="ac_tot" class="radio" value="ac_tot"> Total Acreage</label>
+            <label><input type="Radio" name="dataset" id="ACR_NORM_1" class="radio" value="ACR_NORM_1"> Normalized by County Acreage</label>
+            <label><input type="Radio" name="dataset" id="POP_NORM" class="radio" value="POP_NORM"> Acres per Inhabitant</label>
+          </form>-->
 
-	// create cells
-	var cellsEnter = cells.enter().append("svg:g")
-		.attr("class", "cell")
-		.attr("transform", function (d, i){
-			return "translate(" + i * fieldWidth + ",0)";
-		})
-    .style("border", "2px black solid");
+            <div id="countyMap" class="map">
 
-	cellsEnter.append("rect")
-		.attr("width", fieldWidth)
-		.attr("height", fieldHeight)
-    .style("border", "2px black solid");
+              <svg id="countyMapSvg" class="ca">
 
-	cellsEnter.append("text")
-		.attr("x", fieldWidth / 2)
-		.attr("y", fieldHeight / 2)
-		.attr("dy", ".35em")
-		.text(String);
+                <script>
 
-	//update if not in initialisation
-	if(sortOn !== null) {
-			// update rows
-			if(sortOn != previousSort){
-				rows.sort(function(a,b){return sort(a[sortOn], b[sortOn]);});
-				previousSort = sortOn;
-			}
-			else{
-				rows.sort(function(a,b){return sort(b[sortOn], a[sortOn]);});
-				previousSort = null;
-			}
-			rows.transition()
-				.duration(500)
-				.attr("transform", function (d, i){
-					return "translate(0," + (i+1) * (fieldHeight+1) + ")";
-				});
-	}
-}
+                var margin = {top: 20, right: 30, bottom: 30, left: 40},
+                    width = 960 - margin.left - margin.right,
+                    height = 2000 - margin.top - margin.bottom;
 
-function sort(a,b){
-		return a > b ? 1 : a == b ? 0 : -1;
-}
+                var canvas = d3.select(".ca")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-});
+                var headerGrp = canvas.append("g").attr("class", "headerGrp");
+                var rowsGrp = canvas.append("g").attr("class","rowsGrp");
 
-</script>
+                var fieldHeight = 20;
+                var fieldWidth = 200;
 
-</body>
+                var previousSort = null;
+                var format = d3.time.format("%a %b %d %Y");
+                //var dateFn = function(date) { return format.parse(d.created_at) };
+
+                d3.json("Counties_stats_3col.json", function(data) {
+
+                refreshTable(null);
+
+                function refreshTable(sortOn){
+
+                  // create the table header
+                  var header = headerGrp.selectAll("g")
+                    .data(d3.keys(data[0]))
+                    .enter().append("g")
+                    .attr("class", "header")
+                    .attr("transform", function (d, i){
+                      return "translate(" + i * fieldWidth + ",0)";
+                    })
+                    .on("click", function(d){ return refreshTable(d);});
+
+                  header.append("rect")
+                    .attr("width", fieldWidth)
+                    .attr("height", fieldHeight)
+                    .style("border", "2px red solid");
+
+                  header.append("text")
+                    .attr("x", fieldWidth / 2)
+                    .attr("y", fieldHeight / 2)
+                    .attr("dy", ".35em")
+                    .text(String);
+
+                  // fill the table
+                  // select rows
+                  var rows = rowsGrp.selectAll("g.row").data(data,
+                    function(d){ return d.County; });
+
+                  // create rows
+                  var rowsEnter = rows.enter().append("svg:g")
+                    .attr("class","row")
+                    .attr("transform", function (d, i){
+                      return "translate(0," + (i+1) * (fieldHeight+1) + ")";
+                    })
+                    .on("click", function(d) {
+                                            d3.select(".selected").classed("selected", false);
+                                            d3.select(this).classed("selected", true).transition().duration(300);
+                                            updatePie1(d.County);
+                                            updatePie2(d.County);
+                                          //  updateCountyName(d.County+" County: "+d3.format(",")(d.properties.ac_tot)+" CPAD Acres");
+                                          });
+
+                  // select cells
+                  var cells = rows.selectAll("g.cell").data(function(d){ if (typeof d3.values(d) == "number") {
+                    return d3.format(',')(d3.values(d));}
+                    else {
+                      return d3.values(d);
+                    };
+                    })
+                    .style("border", "2px black solid");
+
+                  // create cells
+                  var cellsEnter = cells.enter().append("svg:g")
+                    .attr("class", "cell")
+                    .attr("transform", function (d, i){
+                      return "translate(" + i * fieldWidth + ",0)";
+                    })
+                    .style("border", "2px black solid");
+
+                  cellsEnter.append("rect")
+                    .attr("width", fieldWidth)
+                    .attr("height", fieldHeight)
+                    .style("border", "2px black solid");
+
+                  cellsEnter.append("text")
+                    .attr("x", fieldWidth / 2)
+                    .attr("y", fieldHeight / 2)
+                    .attr("dy", ".35em")
+                    .text(String);
+
+                  //update if not in initialisation
+                  if(sortOn !== null) {
+                      // update rows
+                      if(sortOn != previousSort){
+                        rows.sort(function(a,b){return sort(a[sortOn], b[sortOn]);});
+                        previousSort = sortOn;
+                      }
+                      else{
+                        rows.sort(function(a,b){return sort(b[sortOn], a[sortOn]);});
+                        previousSort = null;
+                      }
+                      rows.transition()
+                        .duration(500)
+                        .attr("transform", function (d, i){
+                          return "translate(0," + (i+1) * (fieldHeight+1) + ")";
+                        });
+                  }
+                }
+
+                function sort(a,b){
+                    return a > b ? 1 : a == b ? 0 : -1;
+                }
+
+                });
+
+              /*  d3.json("caFields9.json", function(err, ca) {
+
+                  var div = d3.select("body").append("div")
+                  .attr("class", "mapTooltip")
+                  .style("opacity", 0);
+
+                  var radio = d3.select(".ca")
+                              .append("input")
+                              .attr("type","Radio")
+
+                  var colorTOT = d3.scale.linear()
+                    .domain([30237, 993455, 12867928])
+                    .range(['rgb(255,245,96)','rgb(215,211,0)','rgb(35,132,67)'])
+                    .interpolate(d3.interpolateRgb);
+
+                  var colorACR = d3.scale.linear()
+                    .domain([0.01, 0.3228, 0.95])
+                    .range(['rgb(255,245,96)','rgb(205,211,0)','rgb(35,132,67)'])
+                    .interpolate(d3.interpolateRgb);
+
+                  var colorPOP = d3.scale.linear()
+                    .domain([0.01, 2.08, 368])
+                    .range(['rgb(255,245,96)','rgb(205,211,0)','rgb(35,132,67)'])
+                    .interpolate(d3.interpolateRgb);
+
+                  var projection = d3.geo.albers()
+                      .translate([70, 210])
+                      .scale(2700)
+                      .rotate([122.4183, 0])
+                      .center([0, 37.7750]);
+
+                  var svg = d3.select(".ca");
+
+                  var group = svg.selectAll('g')
+                          .data(topojson.feature(ca, ca.objects.counties2).features)
+                          .enter()
+                          .append('g')
+
+                  var path = d3.geo.path().projection(projection);
+
+                  var LegendW = 80;
+                      LegendH = 20;
+
+                  var svg = d3.select("#countyMapSvg").append("svg:svg")
+                      .attr("class", "mapLegend")
+                      .attr("width", LegendW)
+                      .attr("height", LegendH)
+                      .attr("x", 0)
+                      .attr("y", 420)
+                      .style("display", "none");
+
+                  var gradient = svg.append("svg:defs")
+                    .append("svg:linearGradient")
+                      .attr("id", "gradient")
+                      .attr("x1", "100%")
+                      .attr("y1", "0%")
+                      .attr("x2", "0%")
+                      .attr("y2", "0%")
+                      .attr("spreadMethod", "pad");
+
+                  gradient.append("svg:stop")
+                      .attr("offset", "0%")
+                      .attr("stop-color", "rgb(35,132,67)")
+                      .attr("stop-opacity", 1);
+
+                  gradient.append("svg:stop")
+                      .attr("offset", "100%")
+                      .attr("stop-color", "rgb(255,245,96)")
+                      .attr("stop-opacity", 1);
+
+                  svg.append("svg:rect")
+                      .attr("width", LegendW)
+                      .attr("height", LegendH)
+                      .style("fill", "url(#gradient)");
+
+                  svg.append("text")
+                      .attr("text-anchor", "middle")
+                      .attr("x","15%")
+                      .attr("y","69%")
+                      .attr("dy",0)
+                      .style("font-size", "16px")
+                      .style("fill", "black")
+                      .text("-");
+
+                  svg.append("text")
+                      .attr("text-anchor", "middle")
+                      .attr("x","85%")
+                      .attr("y","65%")
+                      .attr("dy",0)
+                      .style("font-size", "14px")
+                      .style("fill", "white")
+                      .text("+");
+
+                  d3.selectAll(".radio").on("change", function(){
+
+                  if (document.getElementById("ac_tot").checked) {
+                          counties.transition().duration(250)
+                               .style("fill", function (d) {return colorTOT(d.properties.ac_tot);});
+                          svg.transition().duration(300).style("display", null);
+                               }
+
+                  else if (document.getElementById("ACR_NORM_1").checked) {
+                          counties.transition().duration(250)
+                               .style("fill", function (d) {return colorACR(d.properties.ACR_NORM_1);});
+                          svg.transition().duration(300).style("display", null);
+                               }
+
+                  else if (document.getElementById("POP_NORM").checked) {
+                          counties.transition().duration(250)
+                               .style("fill", function (d) {return colorPOP(d.properties.POP_NORM);});
+                          svg.transition().duration(300).style("display", null);
+                               }
+                             });
+
+                  var counties = group.append('path')
+                            .attr('d',path)
+                            .attr("class", function(d) { return "counties2 " + d.id; })
+                            .classed("geo", true)
+                            .attr("d", path)
+                            .style("fill", "LightGray")
+                            .on("mouseover", function(d) {
+                            div.transition().duration(300).style("opacity", 1);
+                            div.text(d.properties.name+" County")
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY -30) + "px");})
+                            .on("mouseout", function (d) { div.transition().duration(300).style("opacity", 0);})
+                            .on("click", function(d) {
+                            d3.select(".selected").classed("selected", false);
+                            d3.select(this).classed("selected", true).transition().duration(300);
+                            updatePie1(d.properties.name);
+                            updatePie2(d.properties.name);
+                            updateCountyName(d.properties.name+" County: "+d3.format(",")(d.properties.ac_tot)+" CPAD Acres");
+                        });
+
+                });
+
+                var updatePie1;
+                var updatePie2;
+                var updateCountyName;*/
+
+                </script>
+
+              </svg>
+
+            </div>
+
+            <div id="countyPies" class="pie">
+
+              <svg id="countyName" class="selectedElement" style="height: 35px; width: 100%;"></svg>
+
+              <svg id="countyPie1" class="pieChart" style="height: 232px; width: 100%;"></svg>
+
+              <svg id="countyPie2" class="pieChart" style="height: 260px; width: 100%;"></svg>
+
+              <script>
+
+              d3.csv("Access_type_allcounties_perc.csv", function (dataset) {
+
+                        var width = 215,
+                            height = 300,
+                            radius = Math.min(width, height) / 2;
+
+                        var div = d3.select("body").append("div")
+                        .attr("class", "pieTooltip")
+                        .style("opacity", 0);
+
+                        var color = d3.scale.ordinal()
+                                            .range(["#FFC8B7", "#EF8B6C", "#F05522", "#E0E0E0"])
+                                            .domain(d3.range(0,4));
+
+                        var svg = d3.select("#countyPie1").append("svg")
+                                    .attr("width", width)
+                                    .attr("height", height)
+                                    .append("g")
+                                    .attr("transform", "translate(" + width / 2.4 + "," + height / 2.5 + ")");
+
+                        var arc = d3.svg.arc()
+                                    .innerRadius(radius - 45)
+                                    .outerRadius(radius - 20);
+
+                        var pie = d3.layout.pie()
+                                    .value(function(d) { return d.Alameda; })
+                                    .sort(null);
+
+                        var path = svg.datum(dataset).selectAll("path")
+                                      .data(pie)
+                                      .enter().append("path")
+                                      .attr("fill", function(d, i) { return color(i); })
+                                      .classed("chart", true)
+                                      .attr("d", arc)
+                                      .each(function(d) { this._current = d; })
+                                      .attr("data-legend",function(d) { return d.Access_type})
+                                      .style("display", "none")
+                                      .on("mouseover", function(d, i) {
+                                      div.transition().duration(300).style("opacity", 1);
+                                      div.text(dataset[i].Access_type+": "+d.value+"%")
+                                      .style("left", (d3.event.pageX) + "px")
+                                      .style("top", (d3.event.pageY -30) + "px");})
+                                      .on("mouseout", function () { div.transition().duration(300).style("opacity", 0);
+                                      });
+
+                        var legend = d3.select("#countyPie1").append("svg")
+                        .attr("class", "legend")
+                        .attr("width", radius * 4)
+                        .attr("height", radius * 4)
+                        .selectAll("g")
+                        .data(color.domain())
+                        .enter().append("g")
+                        .attr("transform", function(d, i) { return "translate(220," + i * 20 + ")"; })
+                        .style("display", "none");
+
+                        legend.append("rect")
+                        .attr("y", Math.min(width, height) / 2)
+                        .attr("width", 18)
+                        .attr("height", 18)
+                        .style("fill", color);
+
+                        legend.append("text")
+                        .attr("x", 24)
+                        .attr("y", Math.min(width, height) / 2 + 9)
+                        .attr("dy", ".35em")
+                        .attr("fill", "black")
+                        .attr("font-size", "10px")
+                        .text( function (d, i) { return dataset[i].Access_type;})
+                        .attr("fill", "#444");
+
+                        var titlePie1 = d3.select("#countyPie1").append("svg")
+                                          .attr("x", 220)
+                                          .attr("y", Math.min(width, height) / 2 - 25)
+                                          .style("display", "none");
+
+                          titlePie1.append("text")
+                          .attr("fill", "black")
+                          .attr("font-size", "12px")
+                          .attr("dy", "1em")
+                          .attr("font-weight", "bold")
+                          .text("Protected areas by access")
+                          .attr("fill", "#444");
+
+                        d3.select("select").on("change.1", change);
+
+                        function change() {
+                          setValue(this.value)
+                        };
+
+                        function setValue (value) {
+                          path.style("display", null);
+                          legend.style("display", null);
+                          titlePie1.style("display", null);
+                          pie.value(function(d) { return d[value]; });
+                          path = path.data(pie);
+                          path.transition().duration(750).attrTween("d", arcTween);
+                        }
+
+                        updatePie1 = setValue;
+
+                        function arcTween(a) {
+                          var i = d3.interpolate(this._current, a);
+                          this._current = i(0);
+                          return function(t) {
+                            return arc(i(t));
+                          }
+                          };
+
+                        });
+
+              d3.csv("Agency_lev_allcounties_perc.csv", function (dataset) {
+
+                             var width = 215,
+                                 height = 300,
+                                 radius = Math.min(width, height) / 2;
+
+                             var div = d3.select("body").append("div")
+                             .attr("class", "pieTooltip")
+                             .style("opacity", 0);
+
+                             var color = d3.scale.category20();
+
+                             var svg = d3.select("#countyPie2").append("svg")
+                                         .attr("width", width)
+                                         .attr("height", height)
+                                         .attr("y", "-30")
+                                         .append("g")
+                                         .attr("transform", "translate(" + width / 2.4 + "," + height / 2.5 + ")");
+
+                             var arc = d3.svg.arc()
+                                         .innerRadius(radius - 45)
+                                         .outerRadius(radius - 20);
+
+                             var pie2 = d3.layout.pie()
+                                         .value(function(d) { return d.Alameda; })
+                                         .sort(null);
+
+                             var path = svg.datum(dataset).selectAll("path")
+                                           .data(pie2)
+                                           .enter().append("path")
+                                           .attr("fill", function(d, i) { return color(i); })
+                                           .classed("chart", true)
+                                           .attr("d", arc)
+                                           .each(function(d) { this._current = d; })
+                                           .attr("data-legend",function(d) { return d.Agency_lev})
+                                           .style("display", "none")
+                                           .on("mouseover", function(d, i) {
+                                           div.transition().duration(300).style("opacity", 1);
+                                           div.text(dataset[i].Agency_lev+": "+d.value+"%")
+                                           .style("left", (d3.event.pageX) + "px")
+                                           .style("top", (d3.event.pageY -30) + "px");})
+                                           .on("mouseout", function () { div.transition().duration(300).style("opacity", 0);
+                                           });
+
+                              var legend = d3.select("#countyPie2").append("svg")
+                              .attr("class", "legend")
+                              .attr("width", radius * 4)
+                              .attr("height", radius * 4)
+                              .selectAll("g")
+                              .data(color.domain())
+                              .enter().append("g")
+                              .attr("transform", function(d, i) { return "translate(220," + i * 20 + ")"; })
+                              .style("display", "none");
+
+                              legend.append("rect")
+                              .attr("y", Math.min(width, height) / 2 - 30)
+                              .attr("width", 18)
+                              .attr("height", 18)
+                              .style("fill", color);
+
+                              legend.append("text")
+                              .attr("x", 24)
+                              .attr("y", Math.min(width, height) / 2 - 21)
+                              .attr("dy", ".35em")
+                              .attr("fill", "black")
+                              .attr("font-size", "10px")
+                              .text( function (d, i) { return dataset[i].Agency_lev;})
+                              .attr("fill", "#444");
+
+                              var titlePie2 = d3.select("#countyPie2").append("svg")
+                                                .attr("x", 220)
+                                                .attr("y", Math.min(width, height) / 2 - 55)
+                                                .style("display", "none");
+
+                                titlePie2.append("text")
+                                .attr("fill", "black")
+                                .attr("font-size", "12px")
+                                .attr("dy", "1em")
+                                .attr("font-weight", "bold")
+                                .text("Protected areas by agency type")
+                                .attr("fill", "#444");
+
+                              var countyNameSvg = d3.select("#countyName").append("svg")
+                                                             .attr("width", 600)
+                                                             .attr("height", 50)
+                                                             .style("display", "none");
+
+                             d3.selectAll("select").on("change.2", change);
+
+                            function change() {
+                              setValue(this.value);
+                              setCountyValue(this.properties.name);
+                            };
+
+                            function setValue(value) {
+                              path.style("display", null);
+                              legend.style("display", null);
+                              titlePie2.style("display", null);
+                              pie2.value(function(d) { return d[value]; });
+                              path = path.data(pie2);
+                              path.transition().duration(750).attrTween("d", arcTween);
+                            };
+
+                            function setCountyValue(name) {
+                              countyNameRect = countyNameSvg.style("display", null)
+                                            .append('rect')
+                                            .attr("width", 600)
+                                            .attr("height", 50)
+                                            .style('fill', "white");
+                              countyName = countyNameSvg.style("display", null)
+                                            .append("text")
+                                            .attr("text-anchor", "left")
+                                            .attr("x","0%")
+                                            .attr("y","50%")
+                                            .text(function() { return name})
+                                            .attr("fill", "#444")
+                                            .attr("font-weight", "bold")
+                                            .attr("font-size", "2em");
+                            };
+
+                            updatePie2 = setValue;
+                            updateCountyName = setCountyValue;
+
+                            function arcTween(a) {
+                              var i = d3.interpolate(this._current, a);
+                              this._current = i(0);
+                              return function(t) {
+                                return arc(i(t));
+                              }
+                              };
+
+                             });
+
+                </script>
+
+            </div>
+
+          </div>
+
+    </div>
+  </body>
 </html>

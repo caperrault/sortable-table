@@ -34,3 +34,8 @@ svg {
   font: 10px sans-serif;
   text-anchor: middle;
 }
+
+row.selected {
+    fill-opacity: 0.5;
+    fill: red;
+}

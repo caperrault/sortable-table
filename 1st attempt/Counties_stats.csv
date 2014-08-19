@@ -1,4 +1,4 @@
-name,REGION,ac_tot,ACR_NORM_1,POP_NORM
+County,REGION,Total CPAD Acreage,ACR_NORM_1,CPAD Acres per 1000 inhabitants
 Alameda,Bay Area,476565,0.24,0.08
 Alpine,Sierras,474266,0.94,367.60
 Amador,Sierras,387827,0.25,2.74
