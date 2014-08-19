@@ -93,7 +93,7 @@ stroke:black;
 opacity:0.8;}
 
 .ca {
-  width: 50%;
+  width: 45%;
   height: 500px;
   float: left;
   clear:left;
@@ -115,39 +115,56 @@ label {
 }
 
 .header rect{
-  fill: #000000;
+  fill: #444;
 }
 
 .header text{
   fill: white;
-  font: 10px sans-serif;
+  font-size: 10px;
+  font-family: Helvetica, Arial,inherit;
   text-anchor: middle;
   font-weight: bold;
 }
 
+.header:hover{
+  cursor: pointer;
+}
+
 .cell rect{
-  fill: LightGray;
-  border: 5px dotted black;
-  margin: 5px;
-  padding: 5px;
+  fill: none;
 }
 
 .row {
-  fill: #FFFFFF;
-  border: 5px solid black;
+  fill: black;
+  border: 5px dotted black;
 }
 
 .row:hover{
   opacity: 0.5;
+  cursor: pointer;
 }
 
 .cell text{
-  fill: black;
-  font: 10px sans-serif;
+  font-size: 10px;
+  fill: #444;
+  font-family: Helvetica, Arial,inherit;
   text-anchor: middle;
 }
 
-row.selected {
-    fill-opacity: 0.5;
+.row.selected {
+    fill-opacity: 0.7;
     fill: red;
+}
+
+#countyMap{
+overflow: scroll;
+height: 500px;
+float: left;
+width: 500px;
+}
+
+#countyMapSvg{
+display: block;
+width: 90%;
+height: 1280px;
 }
