@@ -118,12 +118,12 @@
 
             <div id="countyTable" class="table">
 
-              <svg id="countyIndex" >
+              <svg id="countyIndex" class="cell">
 
                 <script>
 
                   var index = [];
-                  for (var i = 1; i < 58; i++) {
+                  for (var i = 1; i < 59; i++) {
                       index.push(i);
                   }
 
@@ -132,25 +132,27 @@
                                    .enter()
                                    .append("rect")
                                    .attr("y", function(d, i) {
-                          			   		return i * 20;})
+                          			   		return i * 21;})
                           			   .attr("x", 0)
                           			   .attr("width", 20)
-                          			   .attr("height", 20)
+                          			   .attr("height", 21)
+                                   .attr("fill", "white")
                                    .classed("header", "true");
 
                   var indexNumber = d3.select("#countyIndex").selectAll("text")
                                .data(index)
                                .enter()
                                .append("text")
+
                                .attr("y", function(d, i) {
-                                   return i * 20;})
-                               .attr("x", 0)
+                                   return (i*21) + 14;})
+                               .attr("x", 10)
                                .attr("width", 20)
-                               .attr("height", 20)
+                               .attr("height", 21)
+                               .attr("font-weight", "bold")
                                .text(function (d, i) {
                                  return d;
-                               })
-                               .attr("fill", "white");
+                               });
 
                 </script>
 
