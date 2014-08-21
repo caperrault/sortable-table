@@ -124,6 +124,7 @@ label {
   font-family: Helvetica, Arial,inherit;
   text-anchor: middle;
   font-weight: bold;
+  padding: 10px;
 }
 
 .header:hover{
@@ -131,21 +132,30 @@ label {
 }
 
 .cell rect{
-  fill: none;
+  border-bottom: 2px black;
 }
 
 .rowsGrp {
   clear: both;
+  border-bottom: 2px black;
 }
+
+/*.cell rect:hover {
+  fill: none;
+}*/
 
 .row {
   fill: black;
   border: 5px dotted black;
+  border-bottom: 2px black;
 }
 
 .row:hover{
   opacity: 0.5;
   cursor: pointer;
+  color: red;
+  border-bottom: 2px black;
+  padding: -10px;
 }
 
 .cell text{
@@ -164,17 +174,22 @@ label {
 overflow: scroll;
 height: 500px;
 float: left;
-width: 500px;
+width: 467px;
 }
 
 #countyRow{
 display: block;
-width: 90%;
-height: 1280px;
+width: 95%;
+height: 1217px;
+float: right;
 }
 
 #countyIndex {
   float: left;
   width: 20px;
-  height: 1280px;
+  height: 1217px;
+}
+
+#countyPies {
+  float:right
 }
